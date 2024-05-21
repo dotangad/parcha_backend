@@ -1,4 +1,4 @@
-table "users" {
+table "user" {
   schema = schema.public
   column "id" {
     null    = false
@@ -29,8 +29,11 @@ table "users" {
   primary_key {
     columns = [column.id]
   }
-  unique "users_email_key" {
+  unique "user_email_key" {
     columns = [column.email]
+  }
+  unique "user_gid_email_key" {
+    columns = [column.google_id, column.email]
   }
 }
 

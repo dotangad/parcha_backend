@@ -1,6 +1,6 @@
-import { Client } from "https://deno.land/x/postgres/mod.ts";
+import { pgClient } from "../../deps.ts";
 
-const db = new Client({
+const db = new pgClient({
   user: Deno.env.get("POSTGRES_USER"),
   password: Deno.env.get("POSTGRES_PASSWORD"),
   database: Deno.env.get("POSTGRES_DB"),

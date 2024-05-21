@@ -182,6 +182,8 @@
     "https://deno.land/x/postgres/mod.ts": "https://deno.land/x/postgres@v0.19.3/mod.ts"
   },
   "remote": {
+    "https://deno.land/std@0.192.0/encoding/base64.ts": "144ae6234c1fbe5b68666c711dc15b1e9ee2aef6d42b3b4345bf9a6c91d70d0d",
+    "https://deno.land/std@0.192.0/encoding/base64url.ts": "2ed4ba122b20fedf226c5d337cf22ee2024fa73a8f85d915d442af7e9ce1fae1",
     "https://deno.land/std@0.214.0/assert/assert.ts": "bec068b2fccdd434c138a555b19a2c2393b71dfaada02b7d568a01541e67cdc5",
     "https://deno.land/std@0.214.0/assert/assertion_error.ts": "9f689a101ee586c4ce92f52fa7ddd362e86434ffdf1f848e45987dc7689976b8",
     "https://deno.land/std@0.214.0/async/delay.ts": "8e1d18fe8b28ff95885e2bc54eccec1713f57f756053576d8228e6ca110793ad",
@@ -285,6 +287,11 @@
     "https://deno.land/std@0.224.0/dotenv/mod.ts": "0180eaeedaaf88647318811cdaa418cc64dc51fb08354f91f5f480d0a1309f7d",
     "https://deno.land/std@0.224.0/dotenv/parse.ts": "09977ff88dfd1f24f9973a338f0f91bbdb9307eb5ff6085446e7c423e4c7ba0c",
     "https://deno.land/std@0.224.0/dotenv/stringify.ts": "275da322c409170160440836342eaa7cf012a1d11a7e700d8ca4e7f2f8aa4615",
+    "https://deno.land/x/djwt@v2.9.1/algorithm.ts": "9b67833bb708880435906bb1ea657608fa78692d05e23e2f5f5917c89120f1d2",
+    "https://deno.land/x/djwt@v2.9.1/deps.ts": "550e9153f2b4b1c63158bfacfb5b80f34f29c3dd857da2becc1941e9ef04138f",
+    "https://deno.land/x/djwt@v2.9.1/mod.ts": "982aff83fb2036e396f5c9996dbff0c2b8949f6d9f35c82270358c440933ab73",
+    "https://deno.land/x/djwt@v2.9.1/signature.ts": "a5649368a4b433b2810e7d47f53661fe3b0f7fe1778cb49234ceae3d6e861185",
+    "https://deno.land/x/djwt@v2.9.1/util.ts": "0d78272bd23a4656ceabe137d496fcca37cf3de36212477642aa5d85a880d87a",
     "https://deno.land/x/hono@v4.3.7/client/client.ts": "dcda3887257fa3164db7b32c56665c6e757f0ef047a14f3f9599ef41725c1525",
     "https://deno.land/x/hono@v4.3.7/client/index.ts": "30def535310a37bede261f1b23d11a9758983b8e9d60a6c56309cee5f6746ab2",
     "https://deno.land/x/hono@v4.3.7/client/utils.ts": "8be84b49c5c7952666875a8e901fde3044c85c853ea6ba3a7e2c0468478459c0",

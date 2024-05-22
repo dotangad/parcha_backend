@@ -1,12 +1,12 @@
-import { Router, verifyJwt } from "../deps.ts";
+import { Router } from "../deps.ts";
 import db from "./db/index.ts";
-import User, { UserInitializer, UserMutator } from "./db/models/public/User.ts";
-import { generateToken, userFromToken } from "./lib/auth.ts";
+import User from "./db/models/public/User.ts";
+import { generateToken } from "./lib/auth.ts";
 import { fetchGoogleUser } from "./lib/googleapis.ts";
 import { verifyAccessToken } from "./lib/middleware.ts";
 
 export const authrouter = new Router({
-  prefix: "/auth",
+  prefix: "/v1/auth",
 });
 
 authrouter.get("/", (ctx) => {
@@ -39,17 +39,19 @@ authrouter.post("/google/", async (ctx, next) => {
       RETURNING *;`,
     [ud.email, ud.name, ud.sub, ud.picture],
   );
+  console.log(user);
 
+  ctx.response.status = 200;
   ctx.response.headers.set("Content-Type", "application/json");
   ctx.response.body = JSON.stringify({
     success: true,
     user,
-    refreshToken: await generateToken(user),
+    token: await generateToken(user),
   });
   next();
 });
 
-authrouter.post("/me/", verifyAccessToken, async (ctx, next) => {
+authrouter.post("/me/", verifyAccessToken, (ctx, next) => {
   ctx.response.status = 200;
   ctx.response.body = { success: true, user: ctx.state.user };
   next();

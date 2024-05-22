@@ -1,4 +1,4 @@
-import { Application } from "../deps.ts";
+import { Application, oakCors } from "../deps.ts";
 import { authrouter } from "./auth.ts";
 
 const app = new Application();
@@ -14,6 +14,9 @@ app.use(async (ctx, next) => {
     } ${ms.toFixed(2)}ms`,
   );
 });
+
+// CORS
+app.use(oakCors());
 
 app.use(authrouter.routes());
 app.use(authrouter.allowedMethods());

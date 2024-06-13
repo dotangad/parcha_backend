@@ -1,5 +1,5 @@
 import { createJwt, getNumericDate, verifyJwt } from "../../deps.ts";
-import User from "../db/models/public/User.ts";
+import { User } from "../db/models.ts";
 
 const keyJson = JSON.parse(await Deno.readTextFile("./jwtkey.json"));
 const key = await crypto.subtle.importKey(

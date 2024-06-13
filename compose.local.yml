@@ -1,12 +1,11 @@
 services:
-  postgres:
-    image: postgres:latest
-    container_name: fridaypg
+  mongodb:
+    image: mongo:latest
+    container_name: fridaymongo
     ports:
-      - 8734:5432
+      - 27017:27017
     environment:
-      POSTGRES_USER: friday
-      POSTGRES_PASSWORD: sexsux
-      POSTGRES_DB: friday
+      MONGO_INITDB_ROOT_USERNAME: friday
+      MONGO_INITDB_ROOT_PASSWORD: friday
     volumes:
-      - ./fridaypg:/var/lib/postgresql/data
+      - ./fridaymongo:/data/db

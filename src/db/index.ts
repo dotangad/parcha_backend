@@ -1,12 +1,18 @@
-import { pgClient } from "../../deps.ts";
+import { MongoClient } from "../../deps.ts";
 
-const db = new pgClient({
-  user: Deno.env.get("POSTGRES_USER"),
-  password: Deno.env.get("POSTGRES_PASSWORD"),
-  database: Deno.env.get("POSTGRES_DB"),
-  hostname: Deno.env.get("POSTGRES_HOST"),
-  port: Deno.env.get("POSTGRES_PORT"),
-});
-await db.connect();
+const uri = "mongodb://friday:friday@localhost:27017";
+const client = new MongoClient(uri);
 
+async function connectDB() {
+  try {
+    await client.connect();
+    console.log("Connected to MongoDB");
+  } catch (error) {
+    console.error("Failed to connect to MongoDB", error);
+  }
+}
+
+const db = client.db("friday");
+
+export { client, connectDB };
 export default db;

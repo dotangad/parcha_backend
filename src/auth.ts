@@ -1,6 +1,6 @@
 import { Router } from "../deps.ts";
-import db from "./db/index.ts";
-import User from "./db/models/public/User.ts";
+import db, { client } from "./db/index.ts";
+import { User } from "./db/models.ts";
 import { generateToken } from "./lib/auth.ts";
 import { fetchGoogleUser } from "./lib/googleapis.ts";
 import { verifyAccessToken } from "./lib/middleware.ts";
@@ -9,8 +9,14 @@ export const authrouter = new Router({
   prefix: "/v1/auth",
 });
 
-authrouter.get("/", (ctx) => {
-  ctx.response.body = `Database is connected? ${db.connected}`;
+authrouter.get("/", async (ctx) => {
+  try {
+    await client.db().admin().ping(); // Perform a simple operation to check the connection
+    ctx.response.body = "Database is connected!";
+  } catch (error) {
+    console.error(error);
+    ctx.response.body = "Database not connected. Check console for error.";
+  }
 });
 
 authrouter.post("/google/", async (ctx, next) => {
@@ -28,17 +34,9 @@ authrouter.post("/google/", async (ctx, next) => {
   }
 
   // create user if not exists
-  const {
-    rows: [user],
-  } = await db.queryObject<User>(
-    `INSERT INTO "user" (id, email, name, google_id, picture)
-      VALUES (GEN_RANDOM_UUID(), $1, $2, $3, $4)
-      ON CONFLICT ON CONSTRAINT user_gid_email_key
-      DO UPDATE SET
-        picture = EXCLUDED.picture
-      RETURNING *;`,
-    [ud.email, ud.name, ud.sub, ud.picture],
-  );
+  const userCollection = db.collection<User>("users");
+  const { upsertedId } = await userCollection.updateOne({ email: ud.email }, { $set: { email: ud.email, name: ud.name, google_id: ud.sub, picture: ud.picture } }, { upsert: true });
+  const user = await userCollection.findOne<User>({ _id: upsertedId! });
   console.log(user);
 
   ctx.response.status = 200;
@@ -46,7 +44,7 @@ authrouter.post("/google/", async (ctx, next) => {
   ctx.response.body = JSON.stringify({
     success: true,
     user,
-    token: await generateToken(user),
+    token: await generateToken(user!),
   });
   next();
 });

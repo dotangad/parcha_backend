@@ -22,6 +22,7 @@ export default {
     onCreate: async (document: Document<TContent>) => document,
   },
   helpers: {
-    getDocumentTitle: (document: Document<TContent>) => document.content.title,
+    getDocumentTitle: async (document: Document<TContent>) =>
+      document.content.title,
   },
 } as TExtension<TContent>;

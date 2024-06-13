@@ -11,17 +11,18 @@ export type TExtension<TContent> = {
   description: string;
   contentSchema: z.AnyZodObject;
   hooks: {
-    onRegister: () => Promise<void>;
-    onCreate: (document: Document<TContent>) => Promise<Document<TContent>>;
+    onRegister?: () => Promise<void>;
+    onCreate?: (document: Document<TContent>) => Promise<Document<TContent>>;
   };
   helpers: {
-    getDocumentTitle: (document: Document<TContent>) => string;
+    getDocumentTitle: (document: Document<TContent>) => Promise<string>;
   };
 };
 
 export async function registerExtension<TContent>(
   extension: TExtension<TContent>,
 ) {
-  await extension.hooks.onRegister();
+  extension.hooks.onRegister && await extension.hooks.onRegister();
+
   EXTENSIONS[extension.identifier] = extension;
 }

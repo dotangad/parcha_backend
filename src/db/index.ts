@@ -1,6 +1,6 @@
 import { MongoClient } from "../../deps.ts";
 
-const uri = "mongodb://friday:friday@localhost:27017";
+const uri = "mongodb://parcha:parcha@localhost:27017";
 const client = new MongoClient(uri);
 
 async function connectDB() {
@@ -12,7 +12,7 @@ async function connectDB() {
   }
 }
 
-const db = client.db("friday");
+const db = client.db("parcha");
 
 export { client, connectDB };
 export default db;

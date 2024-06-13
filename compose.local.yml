@@ -1,11 +1,11 @@
 services:
   mongodb:
     image: mongo:latest
-    container_name: fridaymongo
+    container_name: parchamongo
     ports:
       - 27017:27017
     environment:
-      MONGO_INITDB_ROOT_USERNAME: friday
-      MONGO_INITDB_ROOT_PASSWORD: friday
+      MONGO_INITDB_ROOT_USERNAME: parcha
+      MONGO_INITDB_ROOT_PASSWORD: parcha
     volumes:
-      - ./fridaymongo:/data/db
+      - ./parchamongo:/data/db

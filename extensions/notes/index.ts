@@ -12,10 +12,9 @@ export default {
   identifier: "notes",
   description: "A simple note taking extension",
   version: "1.0.0",
-  author: "Parcha",
   contentSchema: z.object({
     title: z.string(),
-    content: z.string(),
+    content: z.unknown(),
   }),
   hooks: {
     onRegister: async () => {},

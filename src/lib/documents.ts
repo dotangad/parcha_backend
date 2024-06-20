@@ -6,4 +6,5 @@ export type TDocumentQuery = {
   from?: Date;
   to?: Date;
   extensionId?: string[];
+  includeTitles?: boolean;
 };

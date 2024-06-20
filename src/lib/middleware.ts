@@ -1,26 +1,24 @@
-import { Context } from "../../deps.ts";
+import { express } from "../../deps.ts";
 import { userFromToken } from "./auth.ts";
 
 export async function verifyAccessToken(
-  ctx: Context,
-  next: () => Promise<unknown>,
+  req: express.Request,
+  res: express.Response,
+  next: express.NextFunction,
 ) {
-  const token = ctx.request.headers.get("Authorization")?.substr(7);
+  const token = req.headers.authorization?.slice(7);
+  console.log(token);
   if (!token) {
-    ctx.response.status = 401;
-    ctx.response.headers.set("Content-Type", "application/json");
-    ctx.response.body = { success: false, message: "Missing access token" };
+    res.status(401).json({ success: false, message: "Missing access token" });
     return;
   }
 
   try {
     const user = await userFromToken(token!);
-    ctx.state.user = user;
+    res.locals.user = user;
   } catch (e) {
     console.error(e);
-    ctx.response.status = 401;
-    ctx.response.headers.set("Content-Type", "application/json");
-    ctx.response.body = { success: false, message: "Invalid access token" };
+    res.status(401).json({ success: false, message: "Invalid access token" });
     return;
   }
 

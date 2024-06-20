@@ -13,5 +13,14 @@ export {
 export type { Algorithm } from "https://deno.land/x/djwt@v2.9.1/algorithm.ts";
 export { oakCors } from "https://deno.land/x/cors/mod.ts";
 export { z } from "https://deno.land/x/zod@v3.21.4/mod.ts";
+import express from "npm:express@5.0.0-beta.1";
+export { express };
+// @deno-types="npm:@types/cors@2.8.5"
+import cors from "npm:cors@2.8.5";
+export { cors };
+import bodyParser from "npm:body-parser@1.20.2";
+export { bodyParser };
+import morgan from "npm:morgan@1.10.0";
+export { morgan };
 
 export type {};
